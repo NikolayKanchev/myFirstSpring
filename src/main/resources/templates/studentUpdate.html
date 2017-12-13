@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Student :: ADD</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
+          integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous"/>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"
+            integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
+            crossorigin="anonymous"></script>
+
+</head>
+<body>
+
+    <div class="jumbotron">
+        <h1 class="display-3">Update Student Details</h1>
+        <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra
+            attention to featured content or information.</p>
+        <hr class="my-4"/>
+
+        <form action="#" th:action="@{/student/update}" method="post" th:object="${student}">
+            <div class="form-group">
+                <label for="studentId"></label>
+                <input type="hidden" name = "id" class="form-control" id="studentId" th:value="${student.id}"/>
+            </div>
+
+            <div class="form-group">
+                <label for="studentName">Name</label>
+                <input type="text" name = "name" class="form-control" id="studentName"
+                       aria-describedby="nameHelp" placeholder="Enter name" th:value="${student.name}"/>
+                <small id="nameHelp" class="form-text text-muted">We'll never share your name with anyone else.</small>
+            </div>
+
+            <div class="form-group">
+                <label for="studentEmail1">Email address</label>
+                <input type="email" name="email" class="form-control" id="studentEmail1"
+                       aria-describedby="emailHelp" placeholder="Enter email" th:value="${student.email}"/>
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            </div>
+
+            <div class="form-group">
+                <label for="studentCourseName">Example select</label>
+                <select class="form-control" name="courseName" id="studentCourseName">
+                    <option th:each="course : ${courses}" th:if="${course.courseName==student.course.courseName}"
+                            th:text="${student.course.courseName}" th:selected="${student.course.courseName}">No Courses</option>
+                    <option th:each="course : ${courses}" th:if="${course.courseName!=student.course.courseName}"
+                            th:text="${course.courseName}">No Courses</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+    </div>
+</body>
+</html>
